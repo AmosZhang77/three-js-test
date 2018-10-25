@@ -1,3 +1,8 @@
+const path = require('path')
+const resolve = dir => {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
   /** 区分打包环境与开发环境
    * process.env.NODE_ENV==='production'  (打包环境)
@@ -18,7 +23,14 @@ module.exports = {
   // webpack配置
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
   chainWebpack: () => {},
-  configureWebpack: () => {},
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': resolve('src'),
+        '@public': resolve('public')
+      }
+    }
+  },
   //如果想要引入babel-polyfill可以这样写
   // configureWebpack: (config) => {
   //   config.entry = ["babel-polyfill", "./src/main.js"]
